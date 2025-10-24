@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Premium Electronics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        header {
+            background: #131921;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .cart-icon {
+            background: #febd69;
+            color: #131921;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+
+        .cart-icon:hover {
+            background: #f3a847;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #232f3e 0%, #131921 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #667eea;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #B12704;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .product-description {
+            color: #718096;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 1.1rem;
+        }
+
+        .rating-count {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background: #ff9900;
+            color: #0F1111;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #fa8900;
+        }
+
+        .reviews-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .reviews-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #2d3748;
+        }
+
+        .review-card {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.5rem 0;
+        }
+
+        .review-card:last-child {
+            border-bottom: none;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .reviewer-name {
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .review-date {
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        .review-text {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🛒 TechStore</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="cart-icon">🛍️ Cart (0)</div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to TechStore</h1>
+        <p>Discover the latest and greatest in technology</p>
+    </section>
+
+    <div class="container">
+        <section id="products">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; color: #2d3748;">Featured Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">📱</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Premium Smartphone X</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(245 reviews)</span>
+                        </div>
+                        <p class="product-description">Latest flagship phone with stunning display and powerful processor</p>
+                        <p class="product-price">$899.99</p>
+                        <button class="buy-btn" onclick="addToCart('Premium Smartphone X')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">💻</div>
+                    <div class="product-info">
+                        <h3 class="product-name">UltraBook Pro</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(189 reviews)</span>
+                        </div>
+                        <p class="product-description">Sleek and powerful laptop for professionals and creators</p>
+                        <p class="product-price">$1,299.99</p>
+                        <button class="buy-btn" onclick="addToCart('UltraBook Pro')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🎧</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Wireless Headphones</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(512 reviews)</span>
+                        </div>
+                        <p class="product-description">Premium noise-canceling headphones with 30-hour battery life</p>
+                        <p class="product-price">$249.99</p>
+                        <button class="buy-btn" onclick="addToCart('Wireless Headphones')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">⌚</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Smart Watch Elite</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(321 reviews)</span>
+                        </div>
+                        <p class="product-description">Track your fitness and stay connected on the go</p>
+                        <p class="product-price">$349.99</p>
+                        <button class="buy-btn" onclick="addToCart('Smart Watch Elite')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">📷</div>
+                    <div class="product-info">
+                        <h3 class="product-name">4K Camera Pro</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(156 reviews)</span>
+                        </div>
+                        <p class="product-description">Professional-grade camera with advanced features</p>
+                        <p class="product-price">$1,899.99</p>
+                        <button class="buy-btn" onclick="addToCart('4K Camera Pro')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🖥️</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Gaming Monitor 27"</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(278 reviews)</span>
+                        </div>
+                        <p class="product-description">High refresh rate monitor perfect for gaming enthusiasts</p>
+                        <p class="product-price">$449.99</p>
+                        <button class="buy-btn" onclick="addToCart('Gaming Monitor 27\"')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews" class="reviews-section">
+            <h2>Customer Reviews</h2>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Sarah Johnson</div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <div class="review-date">October 15, 2025</div>
+                </div>
+                <p class="review-text">Absolutely love the Premium Smartphone X! The camera quality is outstanding and the battery lasts all day. Best purchase I've made this year. Highly recommend to anyone looking for a reliable phone.</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Michael Chen</div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <div class="review-date">October 12, 2025</div>
+                </div>
+                <p class="review-text">The Wireless Headphones are incredible! Noise cancellation works perfectly, and they're super comfortable for long listening sessions. Worth every penny!</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Emily Rodriguez</div>
+                        <div class="stars">★★★★☆</div>
+                    </div>
+                    <div class="review-date">October 10, 2025</div>
+                </div>
+                <p class="review-text">Great UltraBook Pro! Fast shipping and excellent build quality. Only minor issue is it gets a bit warm during heavy use, but overall very satisfied with my purchase.</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">David Thompson</div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <div class="review-date">October 8, 2025</div>
+                </div>
+                <p class="review-text">The Smart Watch Elite exceeded my expectations. Fitness tracking is accurate, notifications work seamlessly, and the battery life is impressive. TechStore's service was also excellent!</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Jessica Lee</div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <div class="review-date">October 5, 2025</div>
+                </div>
+                <p class="review-text">Amazing experience shopping at TechStore! The 4K Camera Pro is professional quality and perfect for my photography business. Fast delivery and great customer support!</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 TechStore. All rights reserved.</p>
+        <p>Contact us: support@techstore.com | +1 (555) 123-4567</p>
+    </footer>
+
+    <script>
+        let cartCount = 0;
+
+        function addToCart(productName) {
+            cartCount++;
+            document.querySelector('.cart-icon').textContent = `🛍️ Cart (${cartCount})`;
+            
+            // Simple animation
+            const btn = event.target;
+            btn.textContent = 'Added! ✓';
+            btn.style.background = '#10b981';
+            
+            setTimeout(() => {
+                btn.textContent = 'Add to Cart';
+                btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }, 1500);
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
